@@ -19,19 +19,22 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [...AppPages.allBlocProviders(context)],
-      child: ScreenUtilInit(builder: (context, child) {
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'Flutter Demo',
-          theme: ThemeData(
-            appBarTheme: const AppBarTheme(
-                iconTheme: IconThemeData(color: AppColors.primaryText),
-                elevation: 0,
-                backgroundColor: Colors.white),
-          ),
-          onGenerateRoute: AppPages.GenerateRouteSettings,
-        );
-      }),
+      child: ScreenUtilInit(
+          // designSize: const Size(375, 812),
+          designSize: const Size(375, 800),
+          builder: (context, child) {
+            return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              title: 'Flutter Demo',
+              theme: ThemeData(
+                appBarTheme: const AppBarTheme(
+                    iconTheme: IconThemeData(color: AppColors.primaryText),
+                    elevation: 0,
+                    backgroundColor: Colors.white),
+              ),
+              onGenerateRoute: AppPages.GenerateRouteSettings,
+            );
+          }),
     );
   }
 }
