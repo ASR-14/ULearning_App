@@ -68,7 +68,7 @@ Widget searchView() {
               height: 16.h,
               child: Image.asset("assets/icons/search.png"),
             ),
-            Container(
+            SizedBox(
               width: 240.w,
               height: 40.h,
               child: TextField(
@@ -100,13 +100,13 @@ Widget searchView() {
       ),
       GestureDetector(
         child: Container(
-          child: Image.asset("assets/icons/options.png"),
           width: 40.w,
           height: 40.h,
           decoration: BoxDecoration(
               color: AppColors.primaryElement,
               borderRadius: BorderRadius.all(Radius.circular(13.w)),
               border: Border.all(color: AppColors.primaryText)),
+          child: Image.asset("assets/icons/options.png"),
         ),
       )
     ],

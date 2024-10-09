@@ -5,15 +5,15 @@ import 'package:ulearning_app/pages/home/home_page.dart';
 import 'package:ulearning_app/pages/profile/profile.dart';
 
 Widget buildPage(int index) {
-  List<Widget> _widget = [
+  List<Widget> widget = [
     const HomePage(),
-    Center(child: Text("Search")),
-    Center(child: Text("Course")),
-    Center(child: Text("Chat")),
+    const Center(child: Text("Search")),
+    const Center(child: Text("Course")),
+    const Center(child: Text("Chat")),
     const ProfilePage(),
   ];
 
-  return _widget[index];
+  return widget[index];
 }
 
 var bottomTabs = [
