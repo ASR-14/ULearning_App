@@ -40,7 +40,7 @@ class RegisterController {
       if (credential.user != null) {
         await credential.user?.sendEmailVerification();
         await credential.user?.updateDisplayName(userName);
-        String photoUrl = "${AppConstants.SERVER_API_URL}uploads/default.jpg";
+        String photoUrl = "uploads/default.jpg";
         await credential.user?.updatePhotoURL(photoUrl);
         toastInfo(
             msg:

@@ -92,13 +92,18 @@ class SignInController {
     var result = await UserAPI.login(params: loginRequestEntity);
     if (result.code == 200) {
       try {
-        Global.storageService.setString(
+        print(result.toString());
+        // await Global.storageService.remove(AppConstants.STORAGE_USER_PROFILE_KEY);
+        // await Global.storageService.remove(AppConstants.STORAGE_USER_TOKEN_KEY);
+        await Global.storageService.setString(
             AppConstants.STORAGE_USER_PROFILE_KEY, jsonEncode(result.data!));
-        Global.storageService.setString(
+        await Global.storageService.setString(
             AppConstants.STORAGE_USER_TOKEN_KEY, result.data!.access_token!);
         EasyLoading.dismiss();
-        Navigator.of(context)
-            .pushNamedAndRemoveUntil("/application", (route) => false);
+        if (context.mounted) {
+          Navigator.of(context)
+              .pushNamedAndRemoveUntil("/application", (route) => false);
+        }
       } catch (e) {
         print("saving local storage eror ${e.toString()}");
       }

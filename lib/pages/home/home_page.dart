@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ulearning_app/common/values/colors.dart';
 import 'package:ulearning_app/pages/home/bloc/home_page_blocs.dart';
 import 'package:ulearning_app/pages/home/bloc/home_page_states.dart';
+import 'package:ulearning_app/pages/home/home_controller.dart';
 import 'package:ulearning_app/pages/home/widgets/home_page_widgets.dart';
 
 class HomePage extends StatefulWidget {
@@ -14,60 +15,68 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _homeController = HomeController(context: context);
-  //   _homeController.init();
-  // }
+  late HomeController _homeController;
+  @override
+  void initState() {
+    _homeController = HomeController(context: context);
+    _homeController.init();
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: buildAppBar(),
-      body:
-          BlocBuilder<HomePageBlocs, HomePageStates>(builder: (context, state) {
-        return Container(
-          margin: EdgeInsets.symmetric(vertical: 0, horizontal: 25.w),
-          child: CustomScrollView(
-            // crossAxisAlignment: CrossAxisAlignment.start,
-            slivers: [
-              SliverToBoxAdapter(
-                child: homePageText("Hello",
-                    color: AppColors.primaryThirdElementText, top: 20),
-              ),
-              SliverToBoxAdapter(
-                  child: homePageText("dbestech",
-                      color: AppColors.primaryText, top: 5)),
-              SliverPadding(padding: EdgeInsets.only(top: 20.h)),
-              SliverToBoxAdapter(child: searchView()),
-              SliverToBoxAdapter(
-                  child: slidersView(context: context, state: state)),
-              SliverToBoxAdapter(child: menuView()),
-              SliverPadding(
-                padding: EdgeInsets.symmetric(vertical: 18.h, horizontal: 0.w),
-                sliver: SliverGrid(
-                    delegate: SliverChildBuilderDelegate(
-                      childCount: 4,
-                      (context, index) {
-                        return GestureDetector(
-                          onTap: () {},
-                          child: courseGrid(),
-                        );
-                      },
+    return _homeController.userProfile == null
+        ? Container()
+        : Scaffold(
+            backgroundColor: Colors.white,
+            appBar: buildAppBar(_homeController.userProfile!.avatar.toString()),
+            body: BlocBuilder<HomePageBlocs, HomePageStates>(
+                builder: (context, state) {
+              // print(state.courseItem[0].name);
+              return Container(
+                margin: EdgeInsets.symmetric(vertical: 0, horizontal: 25.w),
+                child: CustomScrollView(
+                  // crossAxisAlignment: CrossAxisAlignment.start,
+                  slivers: [
+                    SliverToBoxAdapter(
+                      child: homePageText("Hello",
+                          color: AppColors.primaryThirdElementText, top: 20),
                     ),
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            mainAxisSpacing: 15,
-                            crossAxisSpacing: 15,
-                            childAspectRatio: 1.6)),
-              )
-            ],
-          ),
-        );
-      }),
-    );
+                    SliverToBoxAdapter(
+                        child: homePageText(
+                            _homeController.userProfile!.name ?? "dbestech",
+                            color: AppColors.primaryText,
+                            top: 5)),
+                    SliverPadding(padding: EdgeInsets.only(top: 20.h)),
+                    SliverToBoxAdapter(child: searchView()),
+                    SliverToBoxAdapter(
+                        child: slidersView(context: context, state: state)),
+                    SliverToBoxAdapter(child: menuView()),
+                    SliverPadding(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 18.h, horizontal: 0.w),
+                      sliver: SliverGrid(
+                          delegate: SliverChildBuilderDelegate(
+                            childCount: state.courseItem.length,
+                            (context, index) {
+                              return GestureDetector(
+                                onTap: () {},
+                                child: courseGrid(state.courseItem[index]),
+                              );
+                            },
+                          ),
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2,
+                                  mainAxisSpacing: 15,
+                                  crossAxisSpacing: 15,
+                                  childAspectRatio: 1.6)),
+                    )
+                  ],
+                ),
+              );
+            }),
+          );
   }
 }

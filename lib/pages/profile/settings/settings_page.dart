@@ -5,6 +5,8 @@ import 'package:ulearning_app/common/values/constant.dart';
 import 'package:ulearning_app/global.dart';
 import 'package:ulearning_app/pages/application/bloc/app_blocs.dart';
 import 'package:ulearning_app/pages/application/bloc/app_events.dart';
+import 'package:ulearning_app/pages/home/bloc/home_page_blocs.dart';
+import 'package:ulearning_app/pages/home/bloc/home_page_events.dart';
 import 'package:ulearning_app/pages/profile/settings/bloc/settings_blocs.dart';
 import 'package:ulearning_app/pages/profile/settings/bloc/settings_states.dart';
 import 'package:ulearning_app/pages/profile/settings/widgets/settings_widgets.dart';
@@ -19,8 +21,9 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   void removeUserData() {
     context.read<AppBlocs>().add(const TringgerAppEvent(0));
+    context.read<HomePageBlocs>().add(const HomePageDots(0));
     Global.storageService.remove(AppConstants.STORAGE_USER_TOKEN_KEY);
-    // Global.storageService.remove(AppConstants.STORAGE_USER_PROFILE_KEY);
+    Global.storageService.remove(AppConstants.STORAGE_USER_PROFILE_KEY);
     Navigator.of(context)
         .pushNamedAndRemoveUntil(AppRoutes.SIGN_IN, (route) => false);
   }
