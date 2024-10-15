@@ -9,6 +9,7 @@ import 'package:ulearning_app/common/entities/entities.dart';
 import 'package:ulearning_app/common/values/constant.dart';
 import 'package:ulearning_app/common/widgets/flutter_toast.dart';
 import 'package:ulearning_app/global.dart';
+import 'package:ulearning_app/pages/home/home_controller.dart';
 import 'package:ulearning_app/pages/sign_in/bloc/sign_in_blocs.dart';
 
 class SignInController {
@@ -60,7 +61,12 @@ class SignInController {
                 open_id: id,
                 type: 1);
 
-            asyncPostAllData(loginRequestEntity);
+            await asyncPostAllData(loginRequestEntity);
+
+            if (context.mounted) {
+              await HomeController(context: context).init();
+            }
+
             print("my img url : $photoUrl");
             print("user exist");
 
@@ -84,7 +90,7 @@ class SignInController {
     }
   }
 
-  void asyncPostAllData(LoginRequestEntity loginRequestEntity) async {
+  Future<void> asyncPostAllData(LoginRequestEntity loginRequestEntity) async {
     EasyLoading.show(
         indicator: const CircularProgressIndicator(),
         maskType: EasyLoadingMaskType.clear,
