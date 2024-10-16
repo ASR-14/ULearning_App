@@ -98,11 +98,12 @@ class SignInController {
     var result = await UserAPI.login(params: loginRequestEntity);
     if (result.code == 200) {
       try {
-        print(result.toString());
+        // print(result.toString());
         // await Global.storageService.remove(AppConstants.STORAGE_USER_PROFILE_KEY);
         // await Global.storageService.remove(AppConstants.STORAGE_USER_TOKEN_KEY);
         await Global.storageService.setString(
             AppConstants.STORAGE_USER_PROFILE_KEY, jsonEncode(result.data!));
+        print(".....my token is ${result.data!.access_token!}.......");
         await Global.storageService.setString(
             AppConstants.STORAGE_USER_TOKEN_KEY, result.data!.access_token!);
         EasyLoading.dismiss();
