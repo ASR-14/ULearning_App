@@ -34,7 +34,10 @@ class _CourseDetailState extends State<CourseDetail> {
     return BlocBuilder<CourseDetailBloc, CourseDetailStates>(
         builder: (context, state) {
       return state.courseItem == null
-          ? Container()
+          ? const Center(
+              child: CircularProgressIndicator(
+              backgroundColor: Colors.blue,
+            ))
           : Container(
               color: Colors.white,
               child: SafeArea(
@@ -59,12 +62,18 @@ class _CourseDetailState extends State<CourseDetail> {
                                   SizedBox(height: 15.h),
                                   reusableText("Course Description"),
                                   SizedBox(height: 15.h),
-                                  descriptionText(state.courseItem!.description.toString()),
+                                  descriptionText(
+                                      state.courseItem!.description.toString()),
                                   SizedBox(height: 20.h),
-                                  goBuyButton("Go Buy"),
+                                  GestureDetector(
+                                      onTap: () {
+                                        _courseDetailController
+                                            .goBuy(state.courseItem!.id);
+                                      },
+                                      child: goBuyButton("Go Buy")),
                                   SizedBox(height: 20.h),
                                   courseSummaryTitle(),
-                                  courseSummaryView(context),
+                                  courseSummaryView(context, state),
                                   SizedBox(height: 20.h),
                                   reusableText("Lesson List"),
                                   SizedBox(height: 20.h),
