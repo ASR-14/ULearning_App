@@ -68,55 +68,14 @@ ulearning_app/
 ### Frontend
 - **Flutter**: UI framework
 - **Dart**: Programming language
-- **Provider**: State management
-- **GetX**: Navigation and dependency injection
+- **Bloc**: State management
 - **Shared Preferences**: Local storage
 - **Cached Network Image**: Image caching
 - **Flutter Secure Storage**: Secure data storage
+- **Firebase**: Auth
 
 
 ## 🔌 RESTful API Endpoints
-
-### Authentication
-```
-POST /api/auth/register     # Register new user
-POST /api/auth/login        # User login
-POST /api/auth/refresh      # Refresh token
-```
-
-### User Management
-```
-GET    /api/users           # Get all users
-GET    /api/users/:id       # Get user by ID
-PUT    /api/users/:id       # Update user
-DELETE /api/users/:id       # Delete user
-```
-
-### Course Management
-```
-GET    /api/courses         # Get all courses
-POST   /api/courses         # Create course
-GET    /api/courses/:id     # Get course details
-PUT    /api/courses/:id     # Update course
-DELETE /api/courses/:id     # Delete course
-```
-
-### Content Management
-```
-GET    /api/lessons         # Get all lessons
-POST   /api/lessons         # Create lesson
-GET    /api/lessons/:id     # Get lesson details
-PUT    /api/lessons/:id     # Update lesson
-DELETE /api/lessons/:id     # Delete lesson
-```
-
-### Assessment
-```
-GET    /api/quizzes         # Get all quizzes
-POST   /api/quizzes         # Create quiz
-GET    /api/quizzes/:id     # Get quiz details
-POST   /api/quizzes/:id/submit  # Submit quiz
-```
 
 ## 📋 Prerequisites
 
@@ -124,9 +83,6 @@ POST   /api/quizzes/:id/submit  # Submit quiz
 - Dart SDK (>=2.12.0)
 - Android Studio / VS Code
 - Android SDK / Xcode (for iOS development)
-- Node.js (for backend development)
-- MongoDB
-- Redis
 
 ## 🔧 Installation
 
@@ -169,8 +125,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-## 📫 Contact
-
-Your Name - [@yourtwitter](https://twitter.com/yourtwitter)
-
-Project Link: [https://github.com/yourusername/ulearning_app](https://github.com/yourusername/ulearning_app)
